@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 1 - Objects and Classes</title>
+</head>
+<body>
+    <h1>Hello World of OOP hehe</h1>
+    <h1 id="person1-name"></h1>
+    <h1 id="person1-age"></h1>
+    <h1 id="person1-occupation"></h1>
+
+
+    <script>
+       //Input
+        const person1 ={
+            name:"Cliff Amadeus",
+            age:23,
+            occupation:"hqr"
+        }
+
+        //Process and Output
+
+        //Solution 1: Display via console.log
+        console.log("Name: " + person1.name);
+        console.log("Age: "  +person1.age);
+        console.log("Occupation: " + person1.occupation);
+
+        //Solution 2: Display via HTML
+        document.getElementById("person1-name").innerHTML = "Name: " + person1.name;
+        document.getElementById("person1-age").innerHTML = "Age: " + person1.age;
+        document.getElementById("person1-occupation").innerHTML = "Occupation: " + person1.occupation;
+
+
+    </script>
+</body>
+</html>
