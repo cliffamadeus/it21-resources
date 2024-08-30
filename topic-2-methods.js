@@ -13,21 +13,33 @@ console.log("--------------------------------");
 
 
 // Class definition
-class person{
+class Person {
     constructor(name, age, occupation) {
-      this.name = name;
-      this.age = age;
-      this.occupation = occupation;
+        this.name = name;
+        this.age = age;
+        this.occupation = occupation;
     }
-  
-    // Method to display car information
+
+    // Method to display person information in the console
     displayInfo() {
-        console.log("Name: "+ this.name);
-        console.log("Age: "+ this.age);
-        console.log("Occupation: "+ this.occupation);
+        console.log("Name: " + this.name);
+        console.log("Age: " + this.age);
+        console.log("Occupation: " + this.occupation);
     }
-  }
-  
-  // Creating an object (instance) of the personclass
-  const personOne = new person('Class', 23, 'Instructor');
-  personOne.displayInfo(); 
+
+    // Method to display person information in the HTML
+    displayInfoHTML() {
+        const personElement = document.getElementById('personOne');
+        personElement.innerHTML = `
+            <strong>Name:</strong> ${this.name}<br>
+            <strong>Age:</strong> ${this.age}<br>
+            <strong>Occupation:</strong> ${this.occupation}
+        `;
+    }
+}
+
+// Creating an object (instance) of the Person class
+const personOne = new Person('Cliff', 23, 'Instructor');
+
+// Calling methods
+personOne.displayInfo();       
