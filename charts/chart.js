@@ -20,7 +20,7 @@ class ChartCreator {
         new Chart(this.areaCtx, {
             type: 'line',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: data.labels,
                 datasets: [{
                     label: '# of Votes',
                     data: data.data,
@@ -51,3 +51,4 @@ class ChartCreator {
 
 const chartCreator = new ChartCreator('data.json');
 chartCreator.init();
+console.log(chartCreator.dataUrl);
