@@ -2,6 +2,15 @@ class ChartCreator {
     constructor(dataUrl) {
         this.dataUrl = dataUrl;
         this.areaCtx = document.getElementById('areaChart');
+        this.barCtx = document.getElementById('barChart');
+    }
+
+    async init() {
+        const data = await this.fetchData();
+        if (data) {
+            this.createAreaChart(data);
+            this.createBarChart(data);
+        }
     }
 
     async fetchData() {
@@ -41,12 +50,27 @@ class ChartCreator {
         });
     }
 
-    async init() {
-        const data = await this.fetchData();
-        if (data) {
-            this.createAreaChart(data);
-        }
+    createBarChart(data) {
+        new Chart(this.barCtx, {
+            type: 'bar',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    label: '# of Votes',
+                    data: data.data,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     }
+       
 }
 
 const chartCreator = new ChartCreator('data.json');
