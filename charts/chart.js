@@ -1,15 +1,13 @@
 class ChartCreator {
     constructor(dataUrl) {
         this.dataUrl = dataUrl;
-        this.areaCtx = document.getElementById('areaChart');
-        this.barCtx = document.getElementById('barChart');
+        this.chartData = null;
     }
 
     async init() {
-        const data = await this.fetchData();
-        if (data) {
-            this.createAreaChart(data);
-            this.createBarChart(data);
+        await this.fetchData();
+        if (this.chartData) {
+            this.createCharts();
         }
     }
 
@@ -19,20 +17,36 @@ class ChartCreator {
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
-            return await response.json();
+            this.chartData = await response.json();
         } catch (error) {
             console.error('There has been a problem with your fetch operation:', error);
         }
     }
 
-    createAreaChart(data) {
+    createCharts() {
+        // This method will be overridden in subclasses
+        throw new Error('createCharts() must be implemented in subclasses');
+    }
+}
+
+class LineChart extends ChartCreator {
+    constructor(dataUrl) {
+        super(dataUrl);
+        this.areaCtx = document.getElementById('areaChart');
+    }
+
+    createCharts() {
+        this.createAreaChart();
+    }
+
+    createAreaChart() {
         new Chart(this.areaCtx, {
             type: 'line',
             data: {
-                labels: data.labels,
+                labels: this.chartData.labels,
                 datasets: [{
                     label: '# of Votes',
-                    data: data.data,
+                    data: this.chartData.data,
                     borderColor: 'rgba(75, 192, 192, 1)',
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     fill: true,
@@ -46,33 +60,9 @@ class ChartCreator {
                     }
                 }
             }
-            
         });
     }
-
-    createBarChart(data) {
-        new Chart(this.barCtx, {
-            type: 'bar',
-            data: {
-                labels: data.labels,
-                datasets: [{
-                    label: '# of Votes',
-                    data: data.data,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    }
-       
 }
 
-const chartCreator = new ChartCreator('data.json');
-chartCreator.init();
-console.log(chartCreator.dataUrl);
+const lineChartCreator = new LineChart('data.json');
+lineChartCreator.init();
