@@ -1,6 +1,10 @@
-{
-    "options": [
-        "Yes",
-        "No"
-    ]
-}
+[
+    {
+        "option": "Yes",
+        "color": "rgba(40, 167, 69, 0.6)"
+    },
+    {
+        "option": "No",
+        "color": "rgba(220, 53, 69, 0.6)"
+    }
+]
