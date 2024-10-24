@@ -3,11 +3,11 @@ class VotingApp {
         this.ctx = ctx;
         this.votes = {};
 
-        //Options from JSON
+        // Options from JSON
         this.options = data.map(item => item.option);  
         this.colors = data.map(item => item.color);    
 
-        //Pre requisite methods
+        // Pre requisite methods
         this.initializeForm();
         this.updateChart();
     }
@@ -34,8 +34,19 @@ class VotingApp {
         if (selectedOption) {
             this.votes[selectedOption] = (this.votes[selectedOption] || 0) + 1;
             this.updateChart();
+            this.showToast(); 
             voteInput.value = ''; 
+            
+            // Close the modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('voteModal'));
+            modal.hide();
         }
+    }
+
+    showToast() {
+        const toastEl = document.getElementById('voteToast');
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
     }
 
     updateChart() {

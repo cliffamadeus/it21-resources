@@ -19,15 +19,9 @@
     <div class="container-fluid" style="margin-top: 2rem;">
         <div class="row">
             <div class="col-4">
-                <h3>Mag quiz ta ron?</h3>
-                <div class="card mb-4 p-3">
-                    <form id="voteForm">
-                        <select id="voteOption" class="form-select" required>
-                            <option value="" disabled selected>Select an option</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary mt-2">Vote</button>
-                    </form>
-                </div>                
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#voteModal">
+                    Add Vote
+                </button>      
             </div>
             <div class="col-8">
                 <h1>Voting Results</h1>
@@ -37,6 +31,46 @@
             </div>
         </div>
     </div>
-<script src="voting.js"></script>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="voteModal" tabindex="-1" aria-labelledby="voteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="voteModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Mag quiz ta ron?</h3>
+                    <form id="voteForm">
+                        <select id="voteOption" class="form-select" required>
+                            <option value="" disabled selected>Select an option</option>
+                        </select>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit"  class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>    
+                </div>         
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="voteToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Vote Cast</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Your vote has been recorded!
+            </div>
+        </div>
+    </div>
+
+    <script src="voting.js">
+        
+    </script>
 </body>
 </html>
